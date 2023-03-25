@@ -3,17 +3,20 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 extern "C" {
     fn alert(s: &str);
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
 }
 
 #[wasm_bindgen]
 pub fn bcrypt_hash2(password: &str, cost: i32) -> Result<String, JsError> {
     let msg = format!("bcrypt_hash2({:?}, {:?})", password, cost);
-    alert(&msg);
+    log(&msg);
+
     match bcrypt::hash(password, cost as u32) {
         Ok(s) => Ok(s),
         Err(err) => {
             let msg = format!("{}", err);
-            alert(&msg);
+            log(&msg);
             return Err(JsError::new(&msg));
         }
     }
