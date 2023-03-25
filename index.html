@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>bcrypt-webasm demo</title>
+    <script type="module">
+        import init from "./pkg/calc_bcrypt_webasm.js";
+
+        const run = async () => {
+            const { bcrypt_hash2, throwing_function } = await init();
+            let hash = bcrypt_hash2("foobarbaz", 4);
+            console.log(`Hash: ${hash}`);
+            return hash;
+        };
+
+        run().catch((e) => {
+            console.log(`exception: ${e}`);
+        })
+    </script>
+</head>
+<body>
+</body>
+</html>
+
